@@ -13,7 +13,7 @@ export default function NoteRoom() {
   const typingTimeout = useRef(null);
 
   useEffect(() => {
-    socketRef.current = io("http://localhost:3000");
+    socketRef.current = io("https://real-time-note-app-1.onrender.com");
     socketRef.current.emit("join_note", id);
     API.get(`/notes/${id}`).then((res) => {
       setContent(res.data.content || "");
