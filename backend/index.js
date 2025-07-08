@@ -13,7 +13,7 @@ const server = http.createServer(app);
 // Enable CORS for frontend
 const io = new Server(server, {
   cors: {
-    origin: "https://real-time-note-app-indol.vercel.app",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
@@ -26,7 +26,10 @@ app.use("/notes", require("./routes/noteRoutes"));
 
 // Connect MongoDB
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.error("❌ MongoDB Error:", err));
 
